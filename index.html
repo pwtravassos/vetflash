@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VetFlash Acadêmico</title>
+<meta name="description" content="Flashcards ilustrados de Farmacologia, Patologia Clínica, Semiologia e Emergência para acadêmicos de Medicina Veterinária. Prof. Pedro Travassos, CRMV 309-RR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap" rel="stylesheet">
+<style>
+/* Layout: faixas alternadas teal/creme, como as capas dos ebooks; catálogo em grade de cartões de produto */
+:root{
+  --teal:#0f4c4f;
+  --teal-deep:#0a3638;
+  --cream:#f6efe0;
+  --paper:#fffaf0;
+  --gold:#e3a72f;
+  --red:#c2412d;
+  --ink:#1d2b2c;
+  --muted:#5b6b6b;
+  --font-display:"Kalam","Comic Neue",cursive;
+  --font-body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6}
+img{max-width:100%;display:block;height:auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4vw,40px);margin-bottom:14px}
+h3{font-size:24px}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.narrow{max-width:68ch}
+section{padding:64px 0}
+.dark{background:var(--teal);color:var(--paper)}
+.dark .muted{color:#bcd3d1}
+.muted{color:var(--muted)}
+.gold{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--teal-deep);font-weight:800;text-decoration:none;padding:14px 26px;border-radius:999px;box-shadow:0 4px 0 #a9761a;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn.small{padding:10px 18px;font-size:15px}
+
+/* topo */
+header.top{background:var(--teal-deep);color:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.brand{font-family:var(--font-display);font-size:24px;font-weight:700;text-decoration:none}
+.brand span{color:var(--gold)}
+nav.links{display:flex;gap:20px;flex-wrap:wrap;font-weight:600;font-size:15px}
+nav.links a{text-decoration:none;opacity:.9}
+@media (max-width:640px){nav.links{display:none}}
+
+.hero{background:var(--teal);color:var(--paper);padding:48px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,54px)}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lead{font-size:19px;margin:18px 0 26px;color:#dbe9e7;max-width:52ch}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero ul.facts{list-style:none;padding:0;margin:26px 0 0;display:flex;gap:10px;flex-wrap:wrap}
+.hero ul.facts li{border:1.5px dashed #6fa3a0;border-radius:999px;padding:4px 14px;font-size:14px}
+.hero img{border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+/* dor */
+.pains{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.pain{background:var(--paper);border-left:5px solid var(--red);padding:18px 20px;border-radius:6px}
+@media (max-width:760px){.pains{grid-template-columns:1fr}}
+
+/* como funciona */
+.how{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.steps{list-style:none;counter-reset:s;padding:0;margin:22px 0 0;display:grid;gap:16px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--font-display);font-size:24px;font-weight:700;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--teal-deep);display:grid;place-items:center}
+.steps b{display:block}
+.cardimg{max-width:380px;margin:0 auto;transform:rotate(-2deg);border-radius:10px;box-shadow:0 14px 30px rgba(0,0,0,.35)}
+@media (max-width:860px){.how{grid-template-columns:1fr}}
+.gets{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px;list-style:none;padding:0}
+.gets li{background:rgba(255,255,255,.07);border-radius:10px;padding:14px 16px}
+.gets b{color:var(--gold)}
+
+/* catálogo */
+.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:28px}
+.prod{background:var(--paper);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 0 #e2d6bd}
+.prod img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.prod .body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.prod h3{font-size:23px;color:var(--teal)}
+.prod .tag{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--red)}
+.prod .mods{font-size:15px;color:var(--muted)}
+.prod .buy{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px}
+.price{font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--teal-deep);font-variant-numeric:tabular-nums}
+.bumpnote{margin-top:22px;background:var(--teal-deep);color:var(--paper);border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:center}
+.bumpnote b{color:var(--gold)}
+
+/* pacotes */
+.packs{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:22px;margin-top:28px}
+.pack{background:var(--paper);color:var(--ink);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.pack.best{outline:4px solid var(--gold)}
+.pack .badge{align-self:flex-start;background:var(--gold);color:var(--teal-deep);font-weight:800;font-size:13px;padding:3px 12px;border-radius:999px}
+.pack img{border-radius:10px;max-width:220px}
+.pack .sum{font-size:15px;color:var(--muted)}
+.pack .buy{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.packs{grid-template-columns:1fr}}
+
+/* autor e garantia */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.box{background:var(--paper);border-radius:14px;padding:26px}
+.seal{display:flex;gap:18px;align-items:center}
+.seal .num{flex:none;width:96px;height:96px;border-radius:50%;background:var(--teal);color:var(--gold);display:grid;place-items:center;text-align:center;font-family:var(--font-display);font-weight:700;line-height:1;border:4px dashed var(--gold)}
+.seal .num span{font-size:40px;display:block}
+@media (max-width:760px){.duo{grid-template-columns:1fr}}
+
+/* faq */
+details{background:var(--paper);border-radius:10px;padding:14px 18px;margin-top:10px}
+summary{cursor:pointer;font-weight:800}
+details p{margin-top:8px}
+
+footer{background:var(--teal-deep);color:#bcd3d1;padding:32px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">VetFlash <span>Acadêmico</span></a>
+    <nav class="links" aria-label="Seções">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#ebooks">Ebooks</a>
+      <a href="#pacotes">Combos e coleção</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <h1>Revise para a prova de Vet <em>em minutos por dia</em>, com flashcards ilustrados.</h1>
+      <p class="lead">Pergunta, resposta objetiva e dica de ouro em cada card. Farmacologia, Patologia Clínica, Semiologia e Emergência, escritos para acadêmicos de Medicina Veterinária.</p>
+      <div class="ctas">
+        <a class="btn" href="#ebooks">Ver os ebooks</a>
+        <a class="btn ghost" href="#pacotes">Coleção completa por R$ 147</a>
+      </div>
+      <ul class="facts">
+        <li>400 flashcards</li>
+        <li>3 níveis de dificuldade</li>
+        <li>Selo ★ cai em prova</li>
+        <li>PDF para celular, tablet ou impressão</li>
+      </ul>
+    </div>
+    <img src="img/farmaco-pequenos-mockup-1600.jpg" alt="Ebook Farmacologia de Pequenos Animais aberto no tablet e no celular" width="900" height="675">
+  </div>
+</section>
+
+<section id="voce-se-identifica">
+  <div class="wrap">
+    <h2>Você se identifica?</h2>
+    <div class="pains">
+      <p class="pain">Lê o resumo inteiro e, na hora da prova, não lembra o detalhe que caiu.</p>
+      <p class="pain">Tem pouco tempo entre aulas, estágio e plantão.</p>
+      <p class="pain">Já tentou fazer seus próprios flashcards e desistiu no meio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="como-funciona">
+  <div class="wrap">
+    <div class="how">
+      <div>
+        <h2>Como funciona</h2>
+        <p class="muted narrow">Revisão ativa: você tenta lembrar antes de ler a resposta. É o que fixa o conteúdo.</p>
+        <ol class="steps">
+          <li><div><b>Leia a questão</b>e tente responder sem olhar.</div></li>
+          <li><div><b>Confira a resposta e a dica de ouro</b>com o mecanismo, a dose ou o achado que mais cai.</div></li>
+          <li><div><b>Marque os cards que errou</b>e volte neles em alguns dias.</div></li>
+        </ol>
+      </div>
+      <img class="cardimg" src="img/farmaco-pequenos-card.jpg" alt="Exemplo de flashcard: questão, resposta e dica de ouro sobre farmacocinética" width="700" height="990">
+    </div>
+    <h3 style="margin-top:46px">O que você recebe em cada ebook</h3>
+    <ul class="gets">
+      <li><b>60 a 80 flashcards</b> ilustrados em PDF de alta qualidade</li>
+      <li><b>Módulos</b> organizados por tema</li>
+      <li><b>3 níveis:</b> fundamental, intermediário e avançado</li>
+      <li><b>Selo ★ cai em prova</b> nos temas mais cobrados</li>
+      <li><b>Referências</b> com a bibliografia utilizada</li>
+      <li><b>Acesso imediato</b> após a compra</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ebooks">
+  <div class="wrap">
+    <h2>Escolha a disciplina</h2>
+    <p class="muted narrow">Cada ebook é vendido separado. Comece pela matéria da próxima prova.</p>
+
+    <div class="catalog">
+      <article class="prod">
+        <img src="img/farmaco-pequenos-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Pequenos Animais" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">80 flashcards</span>
+          <h3>Farmacologia de Pequenos Animais</h3>
+          <p>Do mecanismo à dose: farmacologia de cães e gatos.</p>
+          <p class="mods">Princípios · antimicrobianos · dor e anti-inflamatórios · sedação e anestesia · cardiovascular e renal · antiparasitários · endócrino · gastro e emergência.</p>
+          <div class="buy"><span class="price">R$ 37,90</span><a class="btn small" href="https://pay.kiwify.com.br/PnCOcFl">Comprar</a></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <img src="img/farmaco-grandes-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Grandes Animais" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">80 flashcards</span>
+          <h3>Farmacologia de Grandes Animais</h3>
+          <p>Carência, resistência e cólica: a farmacologia de bovinos, equinos e pequenos ruminantes.</p>
+          <p class="mods">Animais de produção · antimicrobianos · antiparasitários · dor e anti-inflamatórios · sedação e anestesia · equinos · reprodução · metabólicas e fluidos.</p>
+          <div class="buy"><span class="price">R$ 37,90</span><a class="btn small" href="https://pay.kiwify.com.br/mGlSVqX">Comprar</a></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <img src="img/patologia-mockup-1600.jpg" alt="Mockup do ebook Patologia Clínica Veterinária" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">60 flashcards</span>
+          <h3>Patologia Clínica Veterinária</h3>
+          <p>Hemograma, bioquímica e urinálise: aprenda a interpretar.</p>
+          <p class="mods">Fase pré-analítica · eritrograma e anemias · leucograma · hemostasia · bioquímica (rim, fígado e músculo) · urinálise, eletrólitos e ácido-base.</p>
+          <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/qCQHRmN">Comprar</a></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <img src="img/semio-pequenos-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Pequenos Animais" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">60 flashcards</span>
+          <h3>Semiologia de Pequenos Animais</h3>
+          <p>O exame clínico de cães e gatos, sistema por sistema.</p>
+          <p class="mods">Exame físico geral · cardiovascular · respiratório · digestório · urinário e reprodutor · neurológico · pele, ouvido e olho.</p>
+          <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/e5d5skz">Comprar</a></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <img src="img/semio-grandes-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Grandes Animais" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">60 flashcards</span>
+          <h3>Semiologia de Grandes Animais</h3>
+          <p>Do “ping” à claudicação: o exame clínico de bovinos, equinos e pequenos ruminantes.</p>
+          <p class="mods">Exame físico geral · digestório dos ruminantes · cólica equina · respiratório e cardiovascular · glândula mamária e reprodução · locomotor e neurológico · neonatos.</p>
+          <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/IzPGmAH">Comprar</a></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <img src="img/emergencia-mockup-1600.jpg" alt="Mockup do ebook Emergência e Terapia Intensiva" width="900" height="675" loading="lazy">
+        <div class="body">
+          <span class="tag">60 flashcards</span>
+          <h3>Emergência e Terapia Intensiva</h3>
+          <p>Os primeiros minutos fazem diferença. Atualizado pelas diretrizes RECOVER 2024.</p>
+          <p class="mods">Triagem · choque, fluidos e transfusão · respiratório · trauma e hemorragia · neurológico e térmico · intoxicações · RCP.</p>
+          <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/vvVfj5v">Comprar</a></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="bumpnote">No checkout de cada ebook, você pode adicionar os outros por <b>&nbsp;R$ 14,90 cada</b>, na mesma compra.</p>
+  </div>
+</section>
+
+<section class="dark" id="pacotes">
+  <div class="wrap">
+    <h2>Combos e coleção completa</h2>
+    <p class="muted narrow">Para quem quer a disciplina inteira, dos pequenos aos grandes animais, ou tudo de uma vez.</p>
+    <div class="packs">
+      <article class="pack">
+        <img src="img/combo-farmaco-capa-1080.jpg" alt="Capa do Combo Farmacologia" width="600" height="600" loading="lazy">
+        <h3>Combo Farmacologia</h3>
+        <p class="sum">Pequenos + Grandes Animais · 160 flashcards · 2 PDFs</p>
+        <div class="buy"><span class="price">R$ 57,90</span><a class="btn small" href="https://pay.kiwify.com.br/qCnF3ub">Comprar combo</a></div>
+      </article>
+      <article class="pack">
+        <img src="img/combo-semio-capa-1080.jpg" alt="Capa do Combo Semiologia" width="600" height="600" loading="lazy">
+        <h3>Combo Semiologia</h3>
+        <p class="sum">Pequenos + Grandes Animais · 120 flashcards · 2 PDFs</p>
+        <div class="buy"><span class="price">R$ 49,90</span><a class="btn small" href="https://pay.kiwify.com.br/spk41KJ">Comprar combo</a></div>
+      </article>
+      <article class="pack best">
+        <span class="badge">Mais completo</span>
+        <img src="img/colecao-capa-1080.jpg" alt="Capa da Coleção Completa VetFlash Acadêmico" width="600" height="600" loading="lazy">
+        <h3>Coleção completa</h3>
+        <p class="sum">Os 6 ebooks · 400 flashcards · Farmacologia, Patologia Clínica, Semiologia e Emergência</p>
+        <div class="buy"><span class="price">R$ 147</span><a class="btn small" href="https://pay.kiwify.com.br/AgA04Ua">Quero a coleção</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="autor">
+  <div class="wrap duo">
+    <div class="box">
+      <h2>Quem preparou</h2>
+      <p><b>Prof. Pedro Travassos</b>, médico-veterinário (CRMV 309-RR), cirurgião e professor universitário.</p>
+      <p class="muted" style="margin-top:10px">Conteúdo escrito e revisado com base em livros-texto e diretrizes atualizadas. Doses e valores conferidos em bulas e consensos em 2026.</p>
+      <p style="margin-top:14px"><a href="https://www.instagram.com/veterinariopedro">Instagram @veterinariopedro</a></p>
+    </div>
+    <div class="box" id="garantia">
+      <div class="seal">
+        <div class="num"><div><span>7</span>dias</div></div>
+        <div>
+          <h2 style="margin-bottom:6px">Garantia de 7 dias</h2>
+          <p>Você tem 7 dias para conhecer o material. Se não for para você, peça o reembolso pela Kiwify e recebe 100% do valor de volta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas" style="padding-top:0">
+  <div class="wrap narrow">
+    <h2>Perguntas frequentes</h2>
+    <details><summary>Funciona no celular?</summary><p>Sim. É um PDF que abre em qualquer celular, tablet ou computador, e pode ser impresso.</p></details>
+    <details><summary>Como recebo o ebook?</summary><p>Logo após a confirmação do pagamento, você recebe por e-mail o acesso à área de membros da Kiwify, onde o PDF fica disponível para baixar.</p></details>
+    <details><summary>Serve para residência e concurso?</summary><p>O foco é a graduação, mas os temas marcados como “cai em prova” são os mais cobrados também em residências e concursos.</p></details>
+    <details><summary>Recebo atualizações?</summary><p>Sim. Correções e melhorias desta edição são enviadas sem custo.</p></details>
+    <details><summary>Posso compartilhar?</summary><p>Não. O material é de uso pessoal e protegido por direitos autorais.</p></details>
+    <details><summary>Quais as formas de pagamento?</summary><p>Cartão de crédito em até 12x, Pix ou boleto, pelo checkout seguro da Kiwify.</p></details>
+    <p style="margin-top:28px"><a class="btn" href="#ebooks">Escolher meu ebook</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>VetFlash Acadêmico · Prof. Pedro Travassos · CRMV 309-RR</span>
+    <span>Pagamentos processados pela Kiwify</span>
+  </div>
+</footer>
+</body>
+</html>
