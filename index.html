@@ -121,6 +121,23 @@ details p{margin-top:8px}
 
 footer{background:var(--teal-deep);color:#bcd3d1;padding:32px 0;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.peek{position:relative;display:block;border:0;padding:0;margin:0;background:none;cursor:pointer;width:100%}
+.peek img{display:block}
+.peeklabel{position:absolute;left:12px;bottom:12px;background:var(--gold,#e0a530);color:#1b2a2a;font-weight:800;font-size:14px;padding:7px 12px;border-radius:999px;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.prevlink{align-self:flex-start;background:none;border:2px solid var(--teal,#0f4c4f);color:var(--teal,#0f4c4f);font:inherit;font-weight:800;font-size:15px;padding:8px 14px;border-radius:999px;cursor:pointer}
+.prevlink:hover{background:var(--teal,#0f4c4f);color:#fff}
+dialog#prev{overflow:auto;border:0;padding:0;border-radius:16px;width:min(980px,96vw);max-height:94vh;background:#fdf8ee;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+dialog#prev::backdrop{background:rgba(8,30,31,.78)}
+.pv-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px 6px}
+.pv-head h3{font-size:20px;color:var(--teal,#0f4c4f);margin:0}
+.pv-x{border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:#555;padding:0 4px}
+.pv-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:8px 18px;scrollbar-width:none}
+.pv-track::-webkit-scrollbar{display:none}
+.pv-track img{flex:0 0 100%;width:100%;height:auto;max-height:calc(94vh - 190px);object-fit:contain;scroll-snap-align:center;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.pv-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 18px 18px}
+.pv-nav{display:flex;align-items:center;gap:10px;font-weight:700;color:#555}
+.pv-nav button{width:42px;height:42px;border-radius:50%;border:2px solid var(--teal,#0f4c4f);background:#fff;color:var(--teal,#0f4c4f);font-size:20px;cursor:pointer}
+.pv-note{font-size:14px;color:#666;padding:0 18px}
 </style>
 </head>
 <body>
@@ -197,93 +214,125 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section id="ebooks">
   <div class="wrap">
     <h2>Escolha a disciplina</h2>
-    <p class="muted narrow">Cada ebook é vendido separado. Comece pela matéria da próxima prova.</p>
+    <p class="muted narrow">Cada ebook é vendido separado. Abra a prévia e veja 5 flashcards de cada um antes de comprar.</p>
 
     <div class="catalog">
       <article class="prod">
-        <img src="img/anatomia-pequenos-mockup-1600.jpg" alt="Mockup do ebook Anatomia de Pequenos Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="anatomia-pequenos" aria-label="Ver 5 flashcards de Anatomia de Pequenos Animais">
+  <img src="img/anatomia-pequenos-mockup-1600.jpg" alt="Mockup do ebook Anatomia de Pequenos Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Anatomia de Pequenos Animais</h3>
           <p>A anatomia de cães e gatos, do osso à aplicação clínica.</p>
           <p class="mods">Osteologia · articulações e músculos · digestório · respiratório · cardiovascular · urogenital · sistema nervoso · anatomia aplicada (venopunção, toracocentese, cistocentese, bloqueios).</p>
+          <button class="prevlink" type="button" data-prev="anatomia-pequenos">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/tZFT1Be">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/anatomia-grandes-mockup-1600.jpg" alt="Mockup do ebook Anatomia de Grandes Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="anatomia-grandes" aria-label="Ver 5 flashcards de Anatomia de Grandes Animais">
+  <img src="img/anatomia-grandes-mockup-1600.jpg" alt="Mockup do ebook Anatomia de Grandes Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Anatomia de Grandes Animais</h3>
           <p>Do casco ao rúmen: a anatomia de bovinos, equinos e pequenos ruminantes.</p>
           <p class="mods">Osteologia · dígito e casco · estômago dos ruminantes · digestório equino · respiratório · cardiovascular · urogenital · glândula mamária · anatomia aplicada à clínica.</p>
+          <button class="prevlink" type="button" data-prev="anatomia-grandes">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/5TOvTBN">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/farmaco-pequenos-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Pequenos Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="farmaco-pequenos" aria-label="Ver 5 flashcards de Farmacologia de Pequenos Animais">
+  <img src="img/farmaco-pequenos-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Pequenos Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">80 flashcards</span>
           <h3>Farmacologia de Pequenos Animais</h3>
           <p>Do mecanismo à dose: farmacologia de cães e gatos.</p>
           <p class="mods">Princípios · antimicrobianos · dor e anti-inflamatórios · sedação e anestesia · cardiovascular e renal · antiparasitários · endócrino · gastro e emergência.</p>
+          <button class="prevlink" type="button" data-prev="farmaco-pequenos">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 37,90</span><a class="btn small" href="https://pay.kiwify.com.br/PnCOcFl">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/farmaco-grandes-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Grandes Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="farmaco-grandes" aria-label="Ver 5 flashcards de Farmacologia de Grandes Animais">
+  <img src="img/farmaco-grandes-mockup-1600.jpg" alt="Mockup do ebook Farmacologia de Grandes Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">80 flashcards</span>
           <h3>Farmacologia de Grandes Animais</h3>
           <p>Carência, resistência e cólica: a farmacologia de bovinos, equinos e pequenos ruminantes.</p>
           <p class="mods">Animais de produção · antimicrobianos · antiparasitários · dor e anti-inflamatórios · sedação e anestesia · equinos · reprodução · metabólicas e fluidos.</p>
+          <button class="prevlink" type="button" data-prev="farmaco-grandes">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 37,90</span><a class="btn small" href="https://pay.kiwify.com.br/mGlSVqX">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/patologia-mockup-1600.jpg" alt="Mockup do ebook Patologia Clínica Veterinária" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="patologia" aria-label="Ver 5 flashcards de Patologia Clínica Veterinária">
+  <img src="img/patologia-mockup-1600.jpg" alt="Mockup do ebook Patologia Clínica Veterinária" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Patologia Clínica Veterinária</h3>
           <p>Hemograma, bioquímica e urinálise: aprenda a interpretar.</p>
           <p class="mods">Fase pré-analítica · eritrograma e anemias · leucograma · hemostasia · bioquímica (rim, fígado e músculo) · urinálise, eletrólitos e ácido-base.</p>
+          <button class="prevlink" type="button" data-prev="patologia">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/qCQHRmN">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/semio-pequenos-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Pequenos Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="semio-pequenos" aria-label="Ver 5 flashcards de Semiologia de Pequenos Animais">
+  <img src="img/semio-pequenos-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Pequenos Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Semiologia de Pequenos Animais</h3>
           <p>O exame clínico de cães e gatos, sistema por sistema.</p>
           <p class="mods">Exame físico geral · cardiovascular · respiratório · digestório · urinário e reprodutor · neurológico · pele, ouvido e olho.</p>
+          <button class="prevlink" type="button" data-prev="semio-pequenos">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/e5d5skz">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/semio-grandes-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Grandes Animais" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="semio-grandes" aria-label="Ver 5 flashcards de Semiologia de Grandes Animais">
+  <img src="img/semio-grandes-mockup-1600.jpg" alt="Mockup do ebook Semiologia de Grandes Animais" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Semiologia de Grandes Animais</h3>
           <p>Do “ping” à claudicação: o exame clínico de bovinos, equinos e pequenos ruminantes.</p>
           <p class="mods">Exame físico geral · digestório dos ruminantes · cólica equina · respiratório e cardiovascular · glândula mamária e reprodução · locomotor e neurológico · neonatos.</p>
+          <button class="prevlink" type="button" data-prev="semio-grandes">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/IzPGmAH">Comprar</a></div>
         </div>
       </article>
 
       <article class="prod">
-        <img src="img/emergencia-mockup-1600.jpg" alt="Mockup do ebook Emergência e Terapia Intensiva" width="900" height="675" loading="lazy">
+        <button class="peek" type="button" data-prev="emergencia" aria-label="Ver 5 flashcards de Emergência e Terapia Intensiva">
+  <img src="img/emergencia-mockup-1600.jpg" alt="Mockup do ebook Emergência e Terapia Intensiva" width="900" height="675" loading="lazy">
+          <span class="peeklabel">Ver 5 flashcards por dentro</span>
+        </button>
         <div class="body">
           <span class="tag">60 flashcards</span>
           <h3>Emergência e Terapia Intensiva</h3>
           <p>Os primeiros minutos fazem diferença. Atualizado pelas diretrizes RECOVER 2024.</p>
           <p class="mods">Triagem · choque, fluidos e transfusão · respiratório · trauma e hemorragia · neurológico e térmico · intoxicações · RCP.</p>
+          <button class="prevlink" type="button" data-prev="emergencia">👀 Ver 5 flashcards grátis</button>
           <div class="buy"><span class="price">R$ 32,90</span><a class="btn small" href="https://pay.kiwify.com.br/vvVfj5v">Comprar</a></div>
         </div>
       </article>
@@ -366,5 +415,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <span>Pagamentos processados pela Kiwify</span>
   </div>
 </footer>
+
+<dialog id="prev" aria-label="Prévia de flashcards">
+  <div class="pv-head"><h3 id="pv-title"></h3><button class="pv-x" type="button" aria-label="Fechar">×</button></div>
+  <p class="pv-note">5 dos flashcards do ebook, exatamente como você recebe no PDF. Deslize para ver os próximos.</p>
+  <div class="pv-track" id="pv-track"></div>
+  <div class="pv-foot">
+    <div class="pv-nav"><button type="button" id="pv-p" aria-label="Anterior">‹</button><span id="pv-n">1 / 5</span><button type="button" id="pv-nx" aria-label="Próximo">›</button></div>
+    <a class="btn" id="pv-buy" href="#">Comprar</a>
+  </div>
+</dialog>
+<script>
+(function(){
+  const d=document.getElementById('prev'),tr=document.getElementById('pv-track'),n=document.getElementById('pv-n');
+  const go=k=>{const w=tr.clientWidth+14;tr.scrollTo({left:Math.max(0,Math.min(4,Math.round(tr.scrollLeft/w)+k))*w,behavior:'smooth'})};
+  tr.addEventListener('scroll',()=>{n.textContent=(Math.round(tr.scrollLeft/(tr.clientWidth+14))+1)+' / 5'});
+  document.getElementById('pv-p').onclick=()=>go(-1);
+  document.getElementById('pv-nx').onclick=()=>go(1);
+  d.querySelector('.pv-x').onclick=()=>d.close();
+  d.addEventListener('click',e=>{if(e.target===d)d.close()});
+  document.addEventListener('keydown',e=>{if(!d.open)return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+  document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.prev,card=b.closest('.prod');
+    document.getElementById('pv-title').textContent=card.querySelector('h3').textContent;
+    const buy=card.querySelector('.buy a');document.getElementById('pv-buy').href=buy.href;
+    document.getElementById('pv-buy').textContent='Comprar por '+card.querySelector('.price').textContent;
+    tr.innerHTML='';for(let i=1;i<=5;i++){const im=new Image();im.src='img/prev/'+k+'-'+i+'.jpg';im.alt='Flashcard '+i+' de 5';im.width=1000;im.height=737;tr.appendChild(im)}
+    n.textContent='1 / 5';d.showModal();tr.scrollLeft=0;
+  }));
+})();
+</script>
 </body>
 </html>
